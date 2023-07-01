@@ -5,11 +5,8 @@ import com.sclerck.hauntedhouse.core.Door;
 import com.sclerck.hauntedhouse.core.Floor;
 import com.sclerck.hauntedhouse.core.Key;
 import com.sclerck.hauntedhouse.core.Room;
-import com.sclerck.hauntedhouse.core.Stairs;
+import com.sclerck.hauntedhouse.core.RoomBuilder;
 import lombok.Getter;
-
-import java.util.List;
-import java.util.Map;
 
 @Getter
 public class House {
@@ -19,19 +16,16 @@ public class House {
     public void setup() {
 
         // Floor 0 is the entrance. Simple tutorial with one key and one locked door
+        Floor floor0 = new Floor(0);
+
+        // Floor 1 has 3 rooms
+        Floor floor1 = new Floor(1);
+
         Key key = new Key(Colour.WHITE);
-        Stairs stairs = null;
-        Floor floor0 = null;
-        Room entrance = new Room("entrance", stairs, floor0);
-        Door door = new Door(entrance, true, key, Colour.WHITE);
-        floor0 = new Floor(List.of(door), 0);
+        Room entrance = RoomBuilder.build("entrance", "This is the entrance hall.", floor1, floor0, true, Colour.WHITE);
+        floor0.addRoom(entrance);
         floor0.getContents().put("key", key);
 
         startingFloor = floor0;
-
-        // Floor 1 has 3 doors
-        Floor floor1 = null;
-
-        stairs = new Stairs(floor1, floor0);
     }
 }

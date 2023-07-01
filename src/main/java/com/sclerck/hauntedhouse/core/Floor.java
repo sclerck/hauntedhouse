@@ -1,27 +1,35 @@
 package com.sclerck.hauntedhouse.core;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.util.LinkedList;
 import java.util.List;
 
-@AllArgsConstructor
 @Getter
 public class Floor extends Location {
 
-    private List<Door> doors;
-
     private int number;
+
+    private List<Room> rooms;
+
+    public Floor(int number) {
+        this.number = number;
+        this.rooms = new LinkedList<>();
+    }
+
+    public void addRoom(Room room) {
+        this.rooms.add(room);
+    }
 
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("You are on floor ").append(number)
-                .append(". There are ").append(doors.size()).append(" doors. ");
+                .append(". There are ").append(rooms.size()).append(" rooms. ");
 
-        if (doors.size() > 0) {
-            stringBuilder.append("The doors are ");
-            doors.forEach(d -> stringBuilder.append(d.getColour().getText()).append(", "));
+        if (rooms.size() > 0) {
+            stringBuilder.append("The doors to the rooms are ");
+            rooms.forEach(r -> stringBuilder.append(r.getDoor().getColour().getText()).append(", "));
         }
 
         if (getContents() == null || getContents().isEmpty()) {

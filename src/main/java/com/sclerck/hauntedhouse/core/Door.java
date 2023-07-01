@@ -7,11 +7,7 @@ import lombok.Getter;
 @Getter
 public class Door {
 
-    private Room room;
-
     private boolean locked;
-
-    private Key key;
 
     private Colour colour;
 
