@@ -1,7 +1,6 @@
 package com.sclerck.hauntedhouse.game;
 
 import com.sclerck.hauntedhouse.core.Colour;
-import com.sclerck.hauntedhouse.core.Door;
 import com.sclerck.hauntedhouse.core.Floor;
 import com.sclerck.hauntedhouse.core.Inventory;
 import com.sclerck.hauntedhouse.core.Key;
@@ -46,12 +45,24 @@ public class HauntedHouseService {
             unlock(text);
         }
 
+        if (text.startsWith("enter")) {
+            enter(text);
+        }
+
         if (text.equalsIgnoreCase("look")) {
             System.out.println(currentLocation);
         }
 
         if (text.equalsIgnoreCase("inventory")) {
             System.out.println(inventory);
+        }
+
+        if (text.equalsIgnoreCase("climb")) {
+            climb();
+        }
+
+        if (text.equalsIgnoreCase("exit")) {
+            exit();
         }
     }
 
@@ -107,10 +118,60 @@ public class HauntedHouseService {
                     System.out.println("The door is already unlocked.");
                 } else {
                     room.getDoor().unlock();
-                    System.out.println("The " + colour.getText() + " door is unlocked and you enter the " + room.getName() + " room.");
-                    currentLocation = room;
+                    inventory.removeKey(key);
+                    System.out.println("The " + colour.getText() + " door is unlocked");
                 }
             }
         }
+    }
+
+    private void enter(String text) {
+        String[] input = text.split(" ");
+
+        Colour colour = Colour.find(input[1]);
+
+        if (colour == null) {
+            System.out.println("No such colour!");
+        } else {
+            Floor floor = (Floor) currentLocation;
+            Room room = floor.getRooms().stream().filter(r -> r.getDoor().getColour().equals(colour)).findFirst().orElse(null);
+
+            if (room == null) {
+                System.out.println("No room has a door of that colour!");
+            } else {
+                if (room.getDoor().isLocked()) {
+                    System.out.println("The door to that room is locked.");
+                } else {
+                    currentLocation = room;
+                    System.out.println("You enter the " + room.getName() + " room.");
+                }
+            }
+        }
+    }
+
+    private void exit() {
+        if (currentLocation instanceof Room) {
+            Room room = (Room)currentLocation;
+            currentLocation = room.getFloor();
+            System.out.println(currentLocation);
+            return;
+        }
+
+        System.out.println("You can only exit a room.");
+    }
+
+    private void climb() {
+        if (currentLocation instanceof Room) {
+            Room room = (Room)currentLocation;
+            if (room.getStairs() != null) {
+                int topFloorNumber = room.getStairs().getTopFloor().getNumber();
+                currentLocation = room.getStairs().getTopFloor();
+                System.out.println("You climbed to floor " + topFloorNumber);
+                return;
+            }
+        }
+
+        System.out.println("There are no stairs to climb!");
+
     }
 }

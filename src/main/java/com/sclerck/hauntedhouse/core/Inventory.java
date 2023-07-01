@@ -26,6 +26,8 @@ public class Inventory {
         keyChain.put(key.getColour(), key);
     }
 
+    public void removeKey(Key key) { keyChain.remove(key.getColour()); }
+
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("You have these items: ").append(items.keySet())

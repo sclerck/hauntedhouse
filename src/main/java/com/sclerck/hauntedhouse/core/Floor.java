@@ -2,6 +2,7 @@ package com.sclerck.hauntedhouse.core;
 
 import lombok.Getter;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -13,6 +14,7 @@ public class Floor extends Location {
     private List<Room> rooms;
 
     public Floor(int number) {
+        super(new HashMap<>());
         this.number = number;
         this.rooms = new LinkedList<>();
     }

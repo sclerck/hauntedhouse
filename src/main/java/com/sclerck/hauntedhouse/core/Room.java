@@ -2,6 +2,8 @@ package com.sclerck.hauntedhouse.core;
 
 import lombok.Getter;
 
+import java.util.Map;
+
 @Getter
 public class Room extends Location {
 
@@ -15,7 +17,8 @@ public class Room extends Location {
 
     private Door door;
 
-    protected Room(String name, String description, Stairs stairs, Floor floor, Door door) {
+    protected Room(String name, String description, Stairs stairs, Floor floor, Door door, Map<String, Object> contents) {
+        super(contents);
         this.name = name;
         this.description = description;
         this.stairs = stairs;
