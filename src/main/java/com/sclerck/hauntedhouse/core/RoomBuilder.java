@@ -7,16 +7,23 @@ public class RoomBuilder {
 
     public static Room build(String name, String description, Floor upFloor, Floor thisFloor, boolean lockedDoor, Colour colour, Map<String, Object> contents) {
 
-        Stairs stairs = null;
-
-        if (upFloor != null) {
-            stairs = new Stairs(upFloor, thisFloor);
-        }
-
-        if (contents == null) {
-            contents = new HashMap<>();
-        }
-
-        return new Room(name, description, stairs, thisFloor, new Door(lockedDoor, colour), contents);
+        return new Room(name, description, new Stairs(upFloor, thisFloor), thisFloor, new Door(lockedDoor, colour), contents);
     }
+
+    public static Room build(String name, String description, Floor thisFloor, boolean lockedDoor, Colour colour, Map<String, Object> contents) {
+
+        return new Room(name, description, thisFloor, new Door(lockedDoor, colour), contents);
+    }
+
+    public static Room build(String name, String description, Floor upFloor, Floor thisFloor, boolean lockedDoor, Colour colour) {
+
+        return new Room(name, description, new Stairs(upFloor, thisFloor), thisFloor, new Door(lockedDoor, colour), new HashMap<>());
+    }
+
+    public static Room build(String name, String description, Floor thisFloor, boolean lockedDoor, Colour colour) {
+
+        return new Room(name, description, thisFloor, new Door(lockedDoor, colour), new HashMap<>());
+    }
+
+
 }

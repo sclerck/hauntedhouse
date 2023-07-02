@@ -1,7 +1,6 @@
 package com.sclerck.hauntedhouse.core;
 
 import java.util.Arrays;
-import java.util.Optional;
 
 public enum Colour {
     RED("Red"),
@@ -9,7 +8,8 @@ public enum Colour {
     GREEN("Green"),
     ORANGE("Orange"),
     BLUE("Blue"),
-    YELLOW("Yellow");
+    YELLOW("Yellow"),
+    BLACK("Black");
 
     private final String text;
 

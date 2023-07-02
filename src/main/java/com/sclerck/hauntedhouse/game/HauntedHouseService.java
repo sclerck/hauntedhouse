@@ -24,12 +24,16 @@ public class HauntedHouseService {
     }
 
     public void init() {
-        house = new House();
-        house.setup();
-
         inventory = new Inventory();
 
+        house = new House();
+        house.setup(this);
+
         System.out.println("Welcome to the Haunted House! Type \"start\" to start the game!");
+    }
+
+    public Inventory getInventory() {
+        return inventory;
     }
 
     public void action(String text) {

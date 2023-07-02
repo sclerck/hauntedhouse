@@ -26,12 +26,25 @@ public class Room extends Location {
         this.door = door;
     }
 
+    protected Room(String name, String description, Floor floor, Door door, Map<String, Object> contents) {
+        super(contents);
+        this.name = name;
+        this.description = description;
+        this.floor = floor;
+        this.door = door;
+        stairs = null;
+    }
+
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("You are in the ").append(name).append(" room on floor ").append(floor.getNumber());
         stringBuilder.append(". ").append(description);
-        stringBuilder.append(" There are stairs going up to floor ").append(stairs.getTopFloor().getNumber()).append(". ");
+
+        if (stairs != null) {
+            stringBuilder.append(" There are stairs going up to floor ").append(stairs.getTopFloor().getNumber()).append(". ");
+        }
+
         if (getContents() == null || getContents().isEmpty()) {
             stringBuilder.append("There is nothing else of note.");
         } else {
