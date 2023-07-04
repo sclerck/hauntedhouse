@@ -3,6 +3,7 @@ package com.sclerck.hauntedhouse.game;
 import com.sclerck.hauntedhouse.core.Colour;
 import com.sclerck.hauntedhouse.core.Floor;
 import com.sclerck.hauntedhouse.core.Inventory;
+import com.sclerck.hauntedhouse.core.Item;
 import com.sclerck.hauntedhouse.core.Key;
 import com.sclerck.hauntedhouse.core.Location;
 import com.sclerck.hauntedhouse.core.Room;
@@ -86,15 +87,11 @@ public class HauntedHouseService {
     private void get(String text) {
         String item = text.split(" ")[1];
 
-        Object floorItem = currentLocation.getContents().get(item);
+        Item floorItem = currentLocation.getContents().get(item);
         if (floorItem == null) {
             System.out.println("No such item is available.");
         } else {
-            if (floorItem instanceof Key) {
-                inventory.addKey((Key) floorItem);
-            } else {
-                inventory.add(item, floorItem);
-            }
+            inventory.add(item, floorItem);
             System.out.println("You picked up the " + item);
             currentLocation.getContents().remove(item);
         }
@@ -177,5 +174,9 @@ public class HauntedHouseService {
 
         System.out.println("There are no stairs to climb!");
 
+    }
+
+    protected Location getCurrentLocation() {
+        return currentLocation;
     }
 }

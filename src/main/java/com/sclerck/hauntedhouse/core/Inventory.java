@@ -5,16 +5,16 @@ import java.util.Map;
 
 public class Inventory {
 
-    private Map<String, Object> items = new HashMap<>();
+    private Map<String, Item> items = new HashMap<>();
 
     private Map<Object, Key> keyChain = new HashMap<>();
 
-    public Object get(String name) {
-        return items.get(name);
-    }
-
-    public void add(String name, Object object) {
-        items.put(name, object);
+    public void add(String name, Item item) {
+        if (item instanceof Key) {
+            addKey((Key)item);
+        } else {
+            items.put(name, item);
+        }
     }
 
     public Key getKey(Colour colour) {
@@ -23,13 +23,21 @@ public class Inventory {
 
     public Key getKey(String inscription) { return keyChain.get(inscription); }
 
-    public void addKey(Key key) {
+    private void addKey(Key key) {
 
         if (key.getInscription() == null) {
             keyChain.put(key.getColour(), key);
         } else {
             keyChain.put(key.getInscription(), key);
         }
+    }
+
+    public Object get(String name) {
+        return items.get(name);
+    }
+
+    public void remove(String name) {
+        items.remove(name);
     }
 
     public void removeKey(Key key) {

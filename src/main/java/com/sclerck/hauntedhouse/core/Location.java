@@ -8,9 +8,9 @@ import java.util.Map;
 @Getter
 public abstract class Location {
 
-    private Map<String, Object> contents;
+    private Map<String, Item> contents;
 
-    public Location(Map<String, Object> contents) {
+    public Location(Map<String, Item> contents) {
         this.contents = contents;
     }
 }

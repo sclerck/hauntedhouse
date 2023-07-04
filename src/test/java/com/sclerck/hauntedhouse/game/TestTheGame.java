@@ -1,5 +1,6 @@
-package com.sclerck.hauntedhouse;
+package com.sclerck.hauntedhouse.game;
 
+import com.sclerck.hauntedhouse.core.Floor;
 import com.sclerck.hauntedhouse.game.HauntedHouseService;
 import org.junit.jupiter.api.Test;
 
@@ -16,26 +17,26 @@ public class TestTheGame {
         service.action("start");
 
         // floor 0
-        service.action("get key");
+        service.action("get Key");
         service.action("unlock white door");
         service.action("enter white door");
         service.action("climb");
+        // floor 1
         service.action("look");
         service.action("enter white door");
-        service.action("get key");
+        service.action("get Key");
         service.action("exit");
         service.action("unlock red door");
         service.action("enter red door");
-        service.action("get key");
+        service.action("get Key");
         service.action("exit");
         service.action("unlock green door");
         service.action("enter green door");
         service.action("climb");
+        // floor 2
         service.action("look");
         service.action("inventory");
 
-
-
+        assertEquals(2, ((Floor)service.getCurrentLocation()).getNumber());
     }
-
 }

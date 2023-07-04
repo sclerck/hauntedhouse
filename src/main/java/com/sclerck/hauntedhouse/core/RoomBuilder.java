@@ -5,12 +5,12 @@ import java.util.Map;
 
 public class RoomBuilder {
 
-    public static Room build(String name, String description, Floor upFloor, Floor thisFloor, boolean lockedDoor, Colour colour, Map<String, Object> contents) {
+    public static Room build(String name, String description, Floor upFloor, Floor thisFloor, boolean lockedDoor, Colour colour, Map<String, Item> contents) {
 
         return new Room(name, description, new Stairs(upFloor, thisFloor), thisFloor, new Door(lockedDoor, colour), contents);
     }
 
-    public static Room build(String name, String description, Floor thisFloor, boolean lockedDoor, Colour colour, Map<String, Object> contents) {
+    public static Room build(String name, String description, Floor thisFloor, boolean lockedDoor, Colour colour, Map<String, Item> contents) {
 
         return new Room(name, description, thisFloor, new Door(lockedDoor, colour), contents);
     }

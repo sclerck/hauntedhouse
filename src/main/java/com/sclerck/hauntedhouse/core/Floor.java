@@ -56,8 +56,8 @@ public class Floor extends Location {
         if (getContents() == null || getContents().isEmpty()) {
             stringBuilder.append(" There is nothing else of note.");
         } else {
-            stringBuilder.append(" There is also");
-            getContents().keySet().forEach(k -> stringBuilder.append(" a ").append(k).append(","));
+            stringBuilder.append(" There is also ");
+            getContents().values().forEach(v -> stringBuilder.append(v).append(","));
         }
 
         return stringBuilder.toString();

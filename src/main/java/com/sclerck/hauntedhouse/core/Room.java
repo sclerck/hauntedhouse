@@ -17,7 +17,7 @@ public class Room extends Location {
 
     private Door door;
 
-    protected Room(String name, String description, Stairs stairs, Floor floor, Door door, Map<String, Object> contents) {
+    protected Room(String name, String description, Stairs stairs, Floor floor, Door door, Map<String, Item> contents) {
         super(contents);
         this.name = name;
         this.description = description;
@@ -26,7 +26,7 @@ public class Room extends Location {
         this.door = door;
     }
 
-    protected Room(String name, String description, Floor floor, Door door, Map<String, Object> contents) {
+    protected Room(String name, String description, Floor floor, Door door, Map<String, Item> contents) {
         super(contents);
         this.name = name;
         this.description = description;
@@ -48,8 +48,8 @@ public class Room extends Location {
         if (getContents() == null || getContents().isEmpty()) {
             stringBuilder.append("There is nothing else of note.");
         } else {
-            stringBuilder.append("There is also");
-            getContents().keySet().forEach(k -> stringBuilder.append(" a ").append(k).append(","));
+            stringBuilder.append("There is also ");
+            getContents().values().forEach(v -> stringBuilder.append(v).append(","));
         }
 
         return stringBuilder.toString();
